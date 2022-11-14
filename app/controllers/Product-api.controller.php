@@ -74,7 +74,7 @@ class ProducApiController {
                         $response = $this->model->getAllWithFilter($order, $orderMode, $limit, $startAt, $filter, $equalTo);
 
                         //Verifica si la consulta se realizó correctamente
-                        if($response){
+                        if(isset($response)){
 
                             //Verifica si el resultado de la consulta está vacío.
                             if (empty($response)) {
@@ -102,7 +102,7 @@ class ProducApiController {
 
                    //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento y paginado.
                    $response = $this->model->getAllProduc($order, $orderMode, $limit, $startAt);
-                    //var_dump($result);
+                  
                     $this->view->response($response,200);
                 }
                 
@@ -145,7 +145,7 @@ class ProducApiController {
         if ($produc)
             $this->view->response($produc);
         else 
-            $this->view->response("La tarea con el id=$id no existe", 404);
+            $this->view->response("El producto con el id=$id no existe", 404);
     }
 
     public function deleteProduc($params = null) {
