@@ -27,9 +27,9 @@ class ProducApiController {
         $orderBy = $_GET['orderBy'] ?? "nombre";
         $orderMode = $_GET['orderMode'] ?? "asc";
         
-        // Parámetros de paginado
+        // Parámetros de paginado, con valores por defecto
         $page = (int)($_GET['page'] ?? 1);
-        $limit = (int)($_GET['limit'] ?? 50); // si no me indican, por defecto muestro 50 registros
+        $limit = (int)($_GET['limit'] ?? 50); 
 
         // Parámetros de filtrado
         $filterBy = $_GET['filterBy'] ?? null;
@@ -81,20 +81,14 @@ class ProducApiController {
                                 $this->view->response("La consulta realizada no arrojó resultados", 204);
                             }
                             else {
-
-                                //Envía el/los producto/s a la vista para ser mostrado/s.
                                 $this->view->response($response, 200);
                             }
                         }
                         else {
-
-                            //Informa error interno de servidor
                             $response = $this->view->response("No se pudo realizar la consulta especificada.", 500);
                         }                            
                     }
                     else {
-
-                        //Informa error de parámetro no válido
                         $response = $this->view->response("Parámetro de filtrado no válido.", 400);
                     }                        
                 }
@@ -108,13 +102,10 @@ class ProducApiController {
                 
             }  
             else {
-                //Informa error de parámetro no válido
                 $response = $this->view->response("Parámetro de paginado no válido.", 400);       
             }
         }
         else {
-
-            //Informa error de parámetro no válido
             $response = $this->view->response("Parámetro de ordenamiento no válido", 400);
         }
     
@@ -137,11 +128,9 @@ class ProducApiController {
     }
 
     public function getProduc($params = null) {
-        // obtengo el id del arreglo de params
         $id = $params[':ID'];
         $produc = $this->model->getProduct($id);
 
-        // si no existe devuelvo 404
         if ($produc)
             $this->view->response($produc);
         else 
