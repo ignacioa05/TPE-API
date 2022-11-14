@@ -6,4 +6,4 @@ Una API REST sencilla para manejar un CRUD de tareas
 
 
 ## Pueba con postman
-El endpoint de la API es: http://localhost/tucarpetalocal/todolist-rest/api/tasks
+El endpoint de la API es: 
