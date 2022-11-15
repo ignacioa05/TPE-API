@@ -39,11 +39,8 @@ class ProducApiController {
         $columns = $this->getHeaderColumns();
 
         // Verifica si los parámetros de ordenado son válidos
-        //in_array comprueba si el valor existe en el arreglo
-        // strtolower convierte strings a minuscula
         if (($orderBy == 'nombre' || in_array(strtolower($orderBy), $columns)) && (strtolower($orderMode == "asc") || strtolower($orderMode == "desc"))){
 
-            //Asigna un valor $order para pasar al modelo en funcion del campo por el que se quiere ordenar
             if ($orderBy == 'nombre') {
                 $order = 'categorias.nombre';
             }
@@ -52,31 +49,23 @@ class ProducApiController {
             }
             // Verifica si los parámetros de paginado son válidos
             if((is_numeric($page) && $page>0) && (is_numeric($limit) && $limit>0)){
-
-                //Calcula cuál es el primer elemento a mostrar del paginado y lo almacena en $startAt
                 $startAt = ($page*$limit)-$limit;
-
                 // Verifica si existen los parámetros de filtrado
                 if ($filterBy!=null && $equalTo!=null){
 
-                    //Verifica que el campo $filterBy exista en la tabla (comparando con $columns)
                     if ($filterBy == 'nombre' || in_array(strtolower($filterBy), $columns)){
-
                         //Asigna un valor $filter para pasar al modelo en funcion del campo por el que se quiere ordenar
                         if ($filterBy == 'nombre') {
                             $filter = 'categorias.nombre';
                         }
                         else {
                             $filter = $filterBy; 
-                        }
-                        
+                        }                     
                         //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento, paginado y filtrado.
                         $response = $this->model->getAllWithFilter($order, $orderMode, $limit, $startAt, $filter, $equalTo);
 
-                        //Verifica si la consulta se realizó correctamente
                         if(isset($response)){
 
-                            //Verifica si el resultado de la consulta está vacío.
                             if (empty($response)) {
                                 $this->view->response("La consulta realizada no arrojó resultados", 204);
                             }
@@ -93,13 +82,10 @@ class ProducApiController {
                     }                        
                 }
                 else {
-
                    //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento y paginado.
                    $response = $this->model->getAllProduc($order, $orderMode, $limit, $startAt);
-                  
                     $this->view->response($response,200);
-                }
-                
+                }   
             }  
             else {
                 $response = $this->view->response("Parámetro de paginado no válido.", 400);       
@@ -111,16 +97,10 @@ class ProducApiController {
     
     }
 
-     //Método que devuelve un arreglo con los nombres de las columnas de una tabla
      function getHeaderColumns($params = null) {
 
-        //Se define un arreglo vacío para almacenar los nombres de las columnas.
         $columns = [];
-
-        // Obtiene toda la información de las columnas de la tabla. Devuelve un arreglo de objetos con toda la info
         $result = $this->model->getColumns();
-
-        //Recorre el arreglo y por cada elemento, extrae el nombre de la columna y lo agrega al arreglo $columns.
         foreach ($result as $column) {
             array_push($columns, $column->Field);
         }
@@ -157,10 +137,6 @@ class ProducApiController {
             $id = $this->model->insertProduc($produc->titulo, $produc->descripcion, $produc->precio, $produc->id_categorias);
             $produc = $this->model->getProduct($id);
             $this->view->response($produc, 201);
-        }
-    
-    
+        }    
     }
-
-
 }
