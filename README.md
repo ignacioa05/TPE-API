@@ -8,7 +8,7 @@ Una API REST para manejar un CRUD de productos
 ## Pueba con postman
 
 
-Get Productos=
+### Get Productos=
 http://localhost/web/API_CaliDeportes/api/produc
 
 Con esto me voy a poder traer todos los productos que contenga mi base de datos.
@@ -29,7 +29,7 @@ Mensajes y Codigos de respuesta: 200: Ok, JSON con los datos de la request
                                  400: "Parámetro de ordenado/ paginado/ filtrado no válido." 
                                  500: "No se pudo realizar la consulta especificada."
 
-Get Producto Determinado=
+### Get Producto Determinado=
 http://localhost/web/API_CaliDeportes/api/produc/ID
 
 Con este endpoint podremos obtener un producto determinado pasandole su ID correspondiente.
@@ -37,7 +37,7 @@ Con este endpoint podremos obtener un producto determinado pasandole su ID corre
 Mensajes y Codigos de respuesta: 200: JSON con los datos de la request 
                                  404: "El producto con el id=$id no existe".
 
-Post Insertar un Producto=
+### Post Insertar un Producto=
 http://localhost/web/API_CaliDeportes/api/produc
 
 Voy a poder realizar la insercion de un producto a mi base de datos. 
@@ -57,7 +57,7 @@ Debo de tener en cuenta de no poner el ID del producto, ya que el mismo es autoi
 Mensajes y Codigos de respuesta: 201: JSON completo 
                                  400: "Complete los datos"
 
-Delete Eliminar Producto=
+### Delete Eliminar Producto=
 http://localhost/web/API_CaliDeportes/api/produc/ID
 
 Podremos realizar la eliminacion de alguno de los productos, pasandole el ID correspondiente. 
